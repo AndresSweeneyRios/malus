@@ -7,9 +7,35 @@
     <title>Port Mapper</title>
     <link rel="stylesheet" href="style.css"/>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <div id="title-bar">
+        <div id="tb-exit">
+            <span></span>
+            <span></span>
+        </div>
+        <div id="tb-max">
+            <span></span>
+        </div>
+        <div id="tb-min">
+            <span></span>
+        </div>
+    </div>
 </head>
 <body>
-    
+    <div id="main">
+        <div id="ports">
+            <div v-for="(i,key) in ports" v-bind:class="i.selected ? 'port selected' : 'port'">
+                <span class="text">{{i.public.port}}</span> 
+                <span class="protocol">{{i.protocol}}</span>
+                <span class="invisible">{{key}}</span>
+            </div>
+        </div>
+        <div id="buttons">
+            <button>Add</button
+            ><button>Remove</button
+            ><button>Edit</button
+            ><button>Refresh</button>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

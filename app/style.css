@@ -1,8 +1,142 @@
+@import 'https://fonts.googleapis.com/css?family=Quicksand';
 * {
   margin: 0;
   padding: 0;
+  font-family: Quicksand, sans-serif;
+  letter-spacing: 0.2px;
 }
 body,
 html {
-  background-color: #282828;
+  background-color: #1e1e1e;
+  height: 100%;
+  color: #fff;
+}
+#title-bar {
+  height: 40px;
+  -webkit-app-region: drag;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100vw;
+}
+#title-bar div {
+  width: 40px;
+  height: 30px;
+  box-sizing: border-box;
+  float: right;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  -webkit-app-region: no-drag;
+}
+#title-bar div span {
+  display: inline-block;
+  position: absolute;
+  height: 15px;
+  pointer-events: none;
+  width: 1px;
+  background-color: rgba(255,255,255,0.8);
+}
+#title-bar div:hover {
+  background: #fff;
+}
+#title-bar div:hover span {
+  background-color: rgba(30,30,30,0.8);
+}
+#title-bar #tb-exit span {
+  transform: rotate(45deg);
+  width: 1px;
+  background-color: #fff;
+  height: 15px;
+}
+#title-bar #tb-exit span:nth-of-type(1) {
+  transform: rotate(-45deg);
+}
+#title-bar #tb-exit:hover {
+  background: #ff47b5;
+}
+#title-bar #tb-max span {
+  width: 10px;
+  height: 10px;
+  background-color: transparent;
+  border: 1px solid rgba(255,255,255,0.8);
+}
+#title-bar #tb-max:hover span {
+  border: 1px solid rgba(30,30,30,0.8);
+}
+#title-bar #tb-min span {
+  transform: rotate(90deg);
+}
+#main {
+  height: 100%;
+  width: 100%;
+  padding-top: 30px;
+  box-sizing: border-box;
+}
+#ports {
+  width: 100%;
+  height: calc(100% - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  flex-wrap: wrap;
+  padding: 20px;
+  box-sizing: border-box;
+}
+#ports .port {
+  height: auto;
+  float: left;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+#ports .port .text {
+  pointer-events: none;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+#ports .port .protocol {
+  pointer-events: none;
+  padding: 5px;
+  font-size: 15px;
+  font-weight: 800;
+  float: right;
+  text-transform: uppercase;
+  color: #ff47b5;
+  border: 1px solid #ff47b5;
+}
+#ports .port.selected {
+  background-color: #fff;
+  color: #1e1e1e;
+}
+#ports .port.selected .protocol {
+  background-color: #ff47b5;
+  color: #fff;
+}
+#buttons button {
+  height: 60px;
+  border: none;
+  background: none;
+  width: 25%;
+  font-size: 20px;
+  transition: color 0.1s, background-color 0.1s;
+  box-sizing: border-box;
+  color: #fff;
+}
+#buttons button:focus {
+  outline: 0;
+}
+#buttons button:hover {
+  background-color: #fff;
+  color: #1e1e1e;
+}
+.invisible {
+  display: none;
 }

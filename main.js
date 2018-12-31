@@ -4,7 +4,7 @@ let mainWindow
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = true
 
 const createWindow = () => {
-  mainWindow = new BrowserWindow({width: 1200, height: 800})
+  mainWindow = new BrowserWindow({width: 1200, height: 800, frame: false})
   mainWindow.loadFile('./app/index.html')
   mainWindow.webContents.openDevTools()
   mainWindow.on('closed', () => mainWindow = null)
