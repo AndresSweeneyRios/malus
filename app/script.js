@@ -1,42 +1,71 @@
-const mapper = require('nat-upnp-wrapper')
-const electron = require('electron');
-const remote = electron.remote
+const mapper = require('nat-upnp-wrapper'), electron = require('electron'), remote = electron.remote
 
-const main = new Vue({
+new Vue({
+    el: '#title-bar',
+
+    computed: {
+        window: remote.getCurrentWindow
+    },
+
+    mounted () {
+        window.onkeydown = e => {
+            switch (e.key.toLowerCase()) {
+                case 'f12': 
+                    this.window.openDevTools()
+                    break
+
+                case 'j': 
+                case 'i': 
+                    if (e.ctrlKey && e.shiftKey) this.window.openDevTools()
+                    break
+
+                case 'f5': 
+                    this.window.reload() 
+                    break
+                    
+                case 'r':
+                    if (e.ctrlKey) this.window.reload()
+                    break
+            }
+        }
+    }
+})
+
+new Vue({
     el: '#main',
+
     data: { 
-        ports: []
+        ports: {},
+        adding: false,
+        refreshing: false
+    },
+
+    methods: {
+        cancel () {
+            this.adding = false
+        },
+
+        async refresh (local=true) {
+            this.refreshing = true
+
+            this.ports = []
+
+            const data = await mapper.mappings(local)
+
+            if ( data.success ) for (const {private: {host, port}} of data.results) {
+                this.ports[host] = this.ports[host] || []
+                this.ports[host].push(port)
+            }
+
+            else console.error(data.err)
+
+            this.$forceUpdate()
+
+            this.refreshing = false
+        }
+    },
+
+    mounted () {
+        this.refresh()
     }
 })
-
-const refresh = (local=true) => mapper.mappings(local).then(data => {
-    if (data.success) main.ports = data.results
-    else throw data.err
-})
-
-refresh()
-
-window.onclick = e => {
-    const window = remote.getCurrentWindow();
-
-    switch (e.target.id) {
-        case 'tb-exit':
-            window.close()
-        break;
-        case 'tb-max':
-            window.isMaximized() ? window.unmaximize() : window.maximize()
-        break;
-        case 'tb-min':
-            window.minimize()
-        break;
-    }
-
-    switch (e.target.className) {
-        case 'port':
-        case 'port selected':
-            const key = e.target.children[2].innerText
-            main.ports[key].selected ? main.ports[key].selected = false : main.ports[key].selected = true
-            main.$forceUpdate()
-        break;
-    }
-}

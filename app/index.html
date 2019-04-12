@@ -4,38 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Port Mapper</title>
+    <title>Malus</title>
     <link rel="stylesheet" href="style.css"/>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
     <div id="title-bar">
-        <div id="tb-exit">
+        <img src="malus.png"/> <span>Malus</span>
+        <div id="tb-exit" @click="window.close()">
             <span></span>
             <span></span>
         </div>
-        <div id="tb-max">
+        <div id="tb-max" @click="window.isMaximized() ? window.unmaximize() : window.maximize()">
             <span></span>
         </div>
-        <div id="tb-min">
+        <div id="tb-min" @click="window.minimize()">
             <span></span>
         </div>
     </div>
 </head>
 <body>
+
     <div id="main">
+
+        <div id="nav">
+            <div id="btn-add" @click="adding = true"></div>
+            <div id="btn-refresh" @click="if (!refreshing) { refresh() }"></div>
+        </div>
+
         <div id="ports">
-            <div v-for="(i,key) in ports" v-bind:class="i.selected ? 'port selected' : 'port'">
-                <span class="text">{{i.public.port}}</span> 
-                <span class="protocol">{{i.protocol}}</span>
-                <span class="invisible">{{key}}</span>
+            <div v-for="host in Object.keys(ports)" :key="host">
+                <h2 class="host">{{ host }}</h2>
+                <div class="ports-wrapper">
+                    <div v-for="port in ports[host]">{{ port }}</div>
+                </div>
             </div>
         </div>
-        <div id="buttons">
-            <button>Add</button
-            ><button>Remove</button
-            ><button>Edit</button
-            ><button>Refresh</button>
+
+        <div id="add" v-if="adding">
+            <div class="box">
+                <input id="port" placeholder="Port number.."/>
+                <button id="add-port"></button>
+                <button class="cancel" @click="cancel()"></button>
+            </div>
         </div>
     </div>
+
+
     <script src="script.js"></script>
 </body>
 </html>

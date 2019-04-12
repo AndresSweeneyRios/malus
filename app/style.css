@@ -1,23 +1,154 @@
-@import 'https://fonts.googleapis.com/css?family=Quicksand';
+@import 'https://fonts.googleapis.com/css?family=Quicksand|Raleway';
 * {
   margin: 0;
   padding: 0;
-  font-family: Quicksand, sans-serif;
-  letter-spacing: 0.2px;
+  font-family: 'Quicksand', sans-serif;
+  letter-spacing: 1px;
 }
 body,
 html {
   background-color: #1e1e1e;
   height: 100%;
-  color: #fff;
+  color: #ebebeb;
+}
+#main {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  padding-top: 30px;
+}
+input,
+button {
+  outline: none;
+  border: none;
+  background: none;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 20px;
+  padding: 20px;
+  color: #ebebeb;
+  background-color: transparent;
+}
+#add {
+  position: absolute;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#add .box {
+  padding: 0;
+  box-sizing: border-box;
+  width: 500px;
+  display: block;
+  text-align: left;
+  padding-top: 40px;
+}
+#add .box button {
+  display: inline-block;
+  box-sizing: border-box;
+  background-color: transparent;
+  background-size: 100%;
+  margin-left: 0;
+  margin-right: 2px;
+  margin-top: 10px;
+}
+#add .box button:hover {
+  filter: invert(80%);
+}
+#add .box #add-port {
+  background-image: url("icons/accept.svg");
+}
+#add .box .cancel {
+  background-image: url("icons/cancel.svg");
+}
+#add .box input {
+  background-color: #fff;
+  color: #1e1e1e;
+}
+#nav {
+  width: 200px;
+  pointer-events: none;
+  position: absolute;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  flex-direction: column;
+  top: 0;
+}
+#nav > div,
+.controls > div,
+button {
+  width: 40px;
+  height: 40px;
+  background-color: #00a455;
+  display: inline-block;
+  pointer-events: all;
+  background-size: auto 55%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  filter: invert(100%);
+  cursor: pointer;
+  margin-top: 5px;
+  margin-left: 10px;
+  border-radius: 50px;
+  transition: filter 0.1s;
+  color: #000;
+}
+#nav > div:hover,
+.controls > div:hover,
+button:hover {
+  filter: invert(100%) brightness(150%) hue-rotate(40deg);
+}
+#btn-add {
+  background-image: url("icons/file+.svg");
+}
+#btn-remove {
+  background-image: url("icons/trash.svg");
+}
+#btn-edit {
+  background-image: url("icons/write.svg");
+}
+#btn-refresh {
+  background-image: url("icons/refresh.svg");
+}
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background-color: #1e1e1e;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #ff5baa;
 }
 #title-bar {
-  height: 40px;
+  height: 30px;
   -webkit-app-region: drag;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   width: 100vw;
+  text-align: center;
+  background-color: #282828;
+}
+#title-bar img {
+  height: 15px;
+  padding: 7.5px;
+  float: left;
+}
+#title-bar span {
+  float: left;
+  line-height: 30px;
+  font-family: Raleway;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  font-weight: 200;
 }
 #title-bar div {
   width: 40px;
@@ -36,10 +167,10 @@ html {
   height: 15px;
   pointer-events: none;
   width: 1px;
-  background-color: rgba(255,255,255,0.8);
+  background-color: rgba(235,235,235,0.8);
 }
 #title-bar div:hover {
-  background: #fff;
+  background: #ebebeb;
 }
 #title-bar div:hover span {
   background-color: rgba(30,30,30,0.8);
@@ -47,96 +178,24 @@ html {
 #title-bar #tb-exit span {
   transform: rotate(45deg);
   width: 1px;
-  background-color: #fff;
+  background-color: #ebebeb;
   height: 15px;
 }
 #title-bar #tb-exit span:nth-of-type(1) {
   transform: rotate(-45deg);
 }
 #title-bar #tb-exit:hover {
-  background: #ff47b5;
+  background: #ff5baa;
 }
 #title-bar #tb-max span {
   width: 10px;
   height: 10px;
   background-color: transparent;
-  border: 1px solid rgba(255,255,255,0.8);
+  border: 1px solid rgba(235,235,235,0.8);
 }
 #title-bar #tb-max:hover span {
   border: 1px solid rgba(30,30,30,0.8);
 }
 #title-bar #tb-min span {
   transform: rotate(90deg);
-}
-#main {
-  height: 100%;
-  width: 100%;
-  padding-top: 30px;
-  box-sizing: border-box;
-}
-#ports {
-  width: 100%;
-  height: calc(100% - 60px);
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
-  flex-wrap: wrap;
-  padding: 20px;
-  box-sizing: border-box;
-}
-#ports .port {
-  height: auto;
-  float: left;
-  text-align: center;
-  box-sizing: border-box;
-  font-size: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px;
-  cursor: pointer;
-  user-select: none;
-}
-#ports .port .text {
-  pointer-events: none;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-#ports .port .protocol {
-  pointer-events: none;
-  padding: 5px;
-  font-size: 15px;
-  font-weight: 800;
-  float: right;
-  text-transform: uppercase;
-  color: #ff47b5;
-  border: 1px solid #ff47b5;
-}
-#ports .port.selected {
-  background-color: #fff;
-  color: #1e1e1e;
-}
-#ports .port.selected .protocol {
-  background-color: #ff47b5;
-  color: #fff;
-}
-#buttons button {
-  height: 60px;
-  border: none;
-  background: none;
-  width: 25%;
-  font-size: 20px;
-  transition: color 0.1s, background-color 0.1s;
-  box-sizing: border-box;
-  color: #fff;
-}
-#buttons button:focus {
-  outline: 0;
-}
-#buttons button:hover {
-  background-color: #fff;
-  color: #1e1e1e;
-}
-.invisible {
-  display: none;
 }

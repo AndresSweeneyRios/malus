@@ -1,0 +1,42 @@
+#nav 
+    width 200px
+    pointer-events none
+    position absolute
+    height 100vh
+    display flex
+    justify-content center
+    align-items baseline
+    flex-direction column
+    top 0
+    
+#nav > div, .controls > div, button
+    width 40px
+    height 40px
+    background-color $green
+    display inline-block
+    pointer-events all
+    background-size auto 55%
+    background-position center center
+    background-repeat no-repeat
+    filter invert(100%)
+    cursor pointer
+    margin-top 5px
+    margin-left 10px
+    border-radius 50px
+    transition filter 0.1s
+    color black
+
+    &:hover
+        filter invert(100%) brightness(150%) hue-rotate(40deg)
+
+#btn-add
+    background-image url("icons/file+.svg")
+
+#btn-remove
+    background-image url("icons/trash.svg")
+
+#btn-edit
+    background-image url("icons/write.svg")
+
+#btn-refresh
+    background-image url("icons/refresh.svg")
