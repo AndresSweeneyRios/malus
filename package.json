@@ -13,6 +13,7 @@
         "electron": "^4.0.0"
     },
     "dependencies": {
-        "nat-upnp-wrapper": "^1.5.0"
+        "nat-upnp-wrapper": "^1.5.0",
+        "vue": "^2.6.10"
     }
 }

@@ -28,7 +28,7 @@
 
         <div id="nav">
             <div id="btn-add" @click="adding = true"></div>
-            <div id="btn-refresh" @click="if (!refreshing) { refresh() }"></div>
+            <div id="btn-refresh" @click="!refreshing ? refresh() : ''"></div>
         </div>
 
         <div id="ports">
