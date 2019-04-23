@@ -4,10 +4,12 @@ let mainWindow
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = true
 
 const createWindow = () => {
-  mainWindow = new BrowserWindow({ width: 1200, height: 800, minWidth: 400, minHeight: 600, frame: false })
+  mainWindow = new BrowserWindow({ width: 1200, height: 800, minWidth: 300, minHeight: 300, frame: false })
   mainWindow.loadFile('./app/index.html')
-  mainWindow.webContents.openDevTools()
+  mainWindow.maximize()
   mainWindow.on('closed', () => mainWindow = null)
+  
+  if (process.env.DEV) mainWindow.webContents.openDevTools()
 }
 
 app.on('ready', createWindow)

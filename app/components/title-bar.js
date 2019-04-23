@@ -1,4 +1,4 @@
-const electron = require('electron'), remote = electron.remote
+const electron = require('electron'), remote = electron.remote, chokidar = require('chokidar')
 
 module.exports = {
     el: '#title-bar',
@@ -28,5 +28,7 @@ module.exports = {
                     break
             }
         }
+        
+        if (process.env.DEV) chokidar.watch('app').on('change', this.window.reload)
     }
 }

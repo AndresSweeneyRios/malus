@@ -25,30 +25,41 @@
 <body>
 
     <div id="main">
-
         <div id="nav">
-            <div id="btn-add" @click="adding = true"></div>
-            <div id="btn-refresh" @click="!refreshing ? refresh() : ''"></div>
+            <div id="btn-add" @click="adding = true">
+                <span></span>
+            </div>
+
+            <div id="btn-refresh" @click="!refreshing ? refresh() : ''">
+                <span></span>
+            </div>
+
+            <div id="btn-save" v-show="changeLength > 0" @click="save()">
+                <span></span>
+            </div>
         </div>
 
         <div id="ports">
             <div v-for="host in Object.keys(ports)" :key="host">
                 <h2 class="host">{{ host }}</h2>
                 <div class="ports-wrapper">
-                    <div v-for="port in ports[host]">{{ port }}</div>
+                    <div v-for="port in ports[host]" class="port">
+                        <input :value="port" type="number" @keyup="event => edit({event,host,port})"
+                        /><button class="remove" @click="remove({host,port})"><span></span></button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div id="add" v-if="adding">
+
+        <div id="add" :style="{display: adding ? 'flex' : 'none'}">
             <div class="box">
                 <input id="port" placeholder="Port number.."/>
-                <button id="add-port"></button>
-                <button class="cancel" @click="cancel()"></button>
+                <button id="add-port"><span></span></button>
+                <button class="cancel" @click="cancel()"><span></span></button>
             </div>
         </div>
     </div>
-
 
     <script src="script.js"></script>
 </body>

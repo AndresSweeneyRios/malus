@@ -4,39 +4,50 @@
     position absolute
     height 100vh
     display flex
-    justify-content center
-    align-items baseline
+    justify-content flex-end
+    align-items flex-end
     flex-direction column
     top 0
+    right 0
+    padding 0 20px 20px 0
+    box-sizing border-box
     
 #nav > div, .controls > div, button
-    width 40px
-    height 40px
-    background-color $green
+    background-color $pink
     display inline-block
     pointer-events all
-    background-size auto 55%
-    background-position center center
-    background-repeat no-repeat
-    filter invert(100%)
+    width 45px
+    height 45px
     cursor pointer
     margin-top 5px
-    margin-left 10px
     border-radius 50px
     transition filter 0.1s
     color black
 
-    &:hover
-        filter invert(100%) brightness(150%) hue-rotate(40deg)
+    span
+        width 45px
+        pointer-events none
+        height 45px
+        filter invert(100%)
+        background-size auto 55%
+        background-position center center
+        background-repeat no-repeat
+        display block
 
-#btn-add
+    &:hover
+        background-color $cyan
+
+#btn-add span
     background-image url("icons/file+.svg")
 
-#btn-remove
+#btn-remove span
     background-image url("icons/trash.svg")
 
-#btn-edit
+#btn-edit span
     background-image url("icons/write.svg")
 
-#btn-refresh
+#btn-refresh span
     background-image url("icons/refresh.svg")
+
+#btn-save span
+    background-image url("icons/save.svg")

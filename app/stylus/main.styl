@@ -1,16 +1,21 @@
-@import 'https://fonts.googleapis.com/css?family=Quicksand|Raleway'
+@import 'https://fonts.googleapis.com/css?family=Quicksand|Raleway|Major+Mono+Display'
 @require 'colors'
 
 *
     margin 0
     padding 0
-    font-family 'Quicksand', sans-serif
+    font-family 'Major Mono Display', sans-serif
     letter-spacing 1px
+    text-transform lowercase
 
 body,html
-    background-color $black
+    background-color $gray
     height 100%
     color $white
+    
+::selection
+    background-color alpha($pink, 0.1)
+    color $pink
             
 #main
     height 100%

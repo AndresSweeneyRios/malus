@@ -6,9 +6,9 @@
     top 0
     left 0
     background-color alpha(black,0.2)
-    display flex
     justify-content center
     align-items center
+    display none
 
     .box
         padding 0
@@ -21,19 +21,23 @@
         button
             display inline-block
             box-sizing border-box
-            background-color transparent
-            background-size 100%
             margin-left 0
-            margin-right 2px
+            margin-right 10px
             margin-top 10px
+            display flex
+            justify-content center
+            align-items center
+            float left
+            padding 0
 
-            &:hover
-                filter invert(80%)
+            span 
+                background-size 100%
 
-        #add-port
+
+        #add-port span
             background-image url("icons/accept.svg")
 
-        .cancel
+        .cancel span
             background-image url("icons/cancel.svg")
 
         input
