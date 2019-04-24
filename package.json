@@ -1,21 +1,39 @@
 {
-    "name": "port-mapper",
-    "version": "0.1.0",
+    "name": "malus",
+    "version": "1.0.4",
     "description": "A port mapper utility, made in Electron.",
     "main": "main.js",
     "scripts": {
         "start": "electron .",
-        "dev": "SET DEV=true & electron ."
+        "dev": "SET DEV=true & electron .",  
+        "pack": "electron-builder --dir",
+        "dist": "electron-builder"
     },
     "repository": "https://github.com/Andr3wRiv3rs/port-mapper",
-    "author": "Andres Sweeney-Rios",
+    "author": {
+        "name": "Andres Sweeney-Rios",
+        "email": "andrewarivers@gmail.com"
+    },
     "license": "MIT",
     "devDependencies": {
-        "electron": "^4.0.0"
+        "electron": "^4.0.0",
+        "electron-builder": "^20.39.0"
     },
     "dependencies": {
         "chokidar": "^2.1.5",
         "express": "^4.16.4",
         "nat-upnp-wrapper": "^1.5.0"
+    },
+    "build": {
+        "appId": "com.electron.malus",
+
+        "mac": {
+            "category": "public.app-category.developer-tools"
+        },
+
+        "win": { 
+            "icon": "build/icon.png", 
+            "target": ["nsis", "dir", "portable", "zip"]
+        }
     }
 }
