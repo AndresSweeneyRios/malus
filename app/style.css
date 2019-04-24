@@ -66,13 +66,13 @@ button {
   float: left;
   padding: 0;
 }
-#add .box button span {
+#add .box button::after {
   background-size: 100%;
 }
-#add .box #add-port span {
+#add .box #add-port::after {
   background-image: url("icons/accept.svg");
 }
-#add .box .cancel span {
+#add .box .cancel::after {
   background-image: url("icons/cancel.svg");
 }
 #add .box input {
@@ -107,9 +107,9 @@ button {
   transition: filter 0.1s;
   color: #000;
 }
-#nav > div span,
-.controls > div span,
-button span {
+#nav > div::after,
+.controls > div::after,
+button::after {
   width: 45px;
   pointer-events: none;
   height: 45px;
@@ -118,26 +118,36 @@ button span {
   background-position: center center;
   background-repeat: no-repeat;
   display: block;
+  content: '';
 }
 #nav > div:hover,
 .controls > div:hover,
 button:hover {
   background-color: #06e7ff;
 }
-#btn-add span {
+#btn-add::after {
   background-image: url("icons/file+.svg");
 }
-#btn-remove span {
+#btn-remove::after {
   background-image: url("icons/trash.svg");
 }
-#btn-edit span {
+#btn-edit::after {
   background-image: url("icons/write.svg");
 }
-#btn-refresh span {
+#btn-refresh::after {
   background-image: url("icons/refresh.svg");
 }
-#btn-save span {
+#btn-save::after {
   background-image: url("icons/save.svg");
+}
+#loading {
+  background-color: transparent !important;
+  pointer-events: none;
+  filter: invert(100%);
+  opacity: 0.6;
+}
+#loading::after {
+  background-image: url("icons/load.svg");
 }
 #ports {
   width: 100vw;
@@ -182,7 +192,7 @@ button:hover {
 #ports .port button:focus {
   opacity: 1;
 }
-#ports .port button span {
+#ports .port button::after {
   width: 100%;
   height: 100%;
   background-image: url("icons/trash.svg");
@@ -224,24 +234,34 @@ button:hover {
 #title-bar {
   height: 30px;
   -webkit-app-region: drag;
+  margin-left: 4px;
   position: fixed;
   top: 0;
   right: 0;
-  width: 100vw;
+  width: calc(100vw - 4px);
   text-align: center;
 }
 #title-bar img {
   height: 15px;
-  padding: 7.5px;
+  padding: 7.5px 7.5px 7.5px 3.5px;
   float: left;
 }
-#title-bar span {
+#title-bar #title {
   float: left;
   line-height: 30px;
   font-family: "Major Mono Display";
   font-size: 14px;
   letter-spacing: 1.5px;
   font-weight: 200;
+}
+#title-bar #tb-resize {
+  position: fixed;
+  left: 0;
+  display: block;
+  top: 0;
+  height: 4px;
+  width: calc(100vw - 120px);
+  -webkit-app-region: no-drag;
 }
 #title-bar div {
   width: 40px;
@@ -253,6 +273,7 @@ button:hover {
   justify-content: center;
   pointer-events: auto;
   -webkit-app-region: no-drag;
+  position: relative;
 }
 #title-bar div span {
   display: inline-block;

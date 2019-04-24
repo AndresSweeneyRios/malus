@@ -3,12 +3,13 @@ const electron = require('electron'), remote = electron.remote, chokidar = requi
 module.exports = {
     el: '#title-bar',
 
-    computed: {
-        window: remote.getCurrentWindow
+    data: {
+        window: remote.getCurrentWindow(),
+        maximized: remote.getCurrentWindow().isMaximized()
     },
 
     mounted () {
-        window.onkeydown = e => {
+        window.window.addEventListener('keydown', e => {
             switch (e.key.toLowerCase()) {
                 case 'f12': 
                     this.window.openDevTools()
@@ -27,8 +28,16 @@ module.exports = {
                     if (e.ctrlKey) this.window.reload()
                     break
             }
-        }
+        })
         
         if (process.env.DEV) chokidar.watch('app').on('change', this.window.reload)
+
+        this.window.on('maximize', () => {
+            Vue.set(this, 'maximized', true)
+        })
+
+        this.window.on('unmaximize', () => {
+            Vue.set(this, 'maximized', false)
+        })
     }
 }

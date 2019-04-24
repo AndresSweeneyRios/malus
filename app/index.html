@@ -7,56 +7,52 @@
     <title>Malus</title>
     <link rel="stylesheet" href="style.css"/>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
 
+<body>
     <div id="title-bar">
-        <img src="malus.png"/> <span>Malus</span>
+        <img src="malus.png"/> <span id="title">Malus</span>
         <div id="tb-exit" @click="window.close()">
             <span></span>
             <span></span>
         </div>
-        <div id="tb-max" @click="window.isMaximized() ? window.unmaximize() : window.maximize()">
+        <div id="tb-max" @click="maximized ? window.unmaximize() : window.maximize()">
             <span></span>
         </div>
         <div id="tb-min" @click="window.minimize()">
             <span></span>
         </div>
+        <span id="tb-resize" v-show="!maximized"></span>
     </div>
-</head>
-<body>
 
     <div id="main">
         <div id="nav">
-            <div id="btn-add" @click="adding = true">
-                <span></span>
-            </div>
-
-            <div id="btn-refresh" @click="!refreshing ? refresh() : ''">
-                <span></span>
-            </div>
-
-            <div id="btn-save" v-show="changeLength > 0" @click="save()">
-                <span></span>
-            </div>
+            <div id="loading" v-show="saving"></div>
+            <div id="btn-save" v-show="Object.keys({...edits, ...additions, ...deletions}).length > 0" @click="save()"></div>
+            <div id="btn-add" @click="adding = true"></div>
+            <div id="btn-refresh" @click="!refreshing ? refresh() : ''"></div>
         </div>
 
         <div id="ports">
-            <div v-for="host in Object.keys(ports)" :key="host">
-                <h2 class="host">{{ host }}</h2>
+            <div>
+                <h2 class="host" v-show="ports.length > 0">{{ host }}</h2>
                 <div class="ports-wrapper">
-                    <div v-for="port in ports[host]" class="port">
-                        <input :value="port" type="number" @keyup="event => edit({event,host,port})"
-                        /><button class="remove" @click="remove({host,port})"><span></span></button>
+                    <div v-for="(port, index) in ports" class="port">
+                        <input v-model="ports[index]" :disabled="saving" type="number" @keyup="event => edit({event, index})"
+                        /><button class="remove" @click="remove({ports: [{port, index}]})"></button>
                     </div>
                 </div>
             </div>
         </div>
 
-
         <div id="add" :style="{display: adding ? 'flex' : 'none'}">
             <div class="box">
-                <input id="port" placeholder="Port number.."/>
-                <button id="add-port"><span></span></button>
-                <button class="cancel" @click="cancel()"><span></span></button>
+                <input id="port" v-model="port" placeholder="Port number.." type="number"/>
+                <button id="add-port" @click="
+                    add({ports: [port]})
+                    cancel()
+                "></button>
+                <button class="cancel" @click="cancel"></button>
             </div>
         </div>
     </div>

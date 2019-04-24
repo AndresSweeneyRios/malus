@@ -1,24 +1,34 @@
 #title-bar
     height 30px
     -webkit-app-region drag
+    margin-left 4px
     position fixed
     top 0
     right 0
-    width 100vw
+    width calc(100vw - 4px)
     text-align center
 
     img 
         height 15px
-        padding 7.5px
+        padding 7.5px 7.5px 7.5px 3.5px 
         float left
 
-    span 
+    #title
         float left
         line-height 30px
         font-family "Major Mono Display"
         font-size 14px
         letter-spacing 1.5px
         font-weight 200
+
+    #tb-resize
+        position fixed
+        left 0
+        display block
+        top 0
+        height 4px
+        width calc(100vw - 120px)
+        -webkit-app-region no-drag
 
     div
         width 40px
@@ -30,6 +40,7 @@
         justify-content center
         pointer-events auto
         -webkit-app-region no-drag
+        position relative
 
         span 
             display inline-block

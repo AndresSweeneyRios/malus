@@ -24,7 +24,7 @@
     transition filter 0.1s
     color black
 
-    span
+    &::after
         width 45px
         pointer-events none
         height 45px
@@ -33,21 +33,30 @@
         background-position center center
         background-repeat no-repeat
         display block
+        content ''
 
     &:hover
         background-color $cyan
 
-#btn-add span
+#btn-add::after
     background-image url("icons/file+.svg")
 
-#btn-remove span
+#btn-remove::after
     background-image url("icons/trash.svg")
 
-#btn-edit span
+#btn-edit::after
     background-image url("icons/write.svg")
 
-#btn-refresh span
+#btn-refresh::after
     background-image url("icons/refresh.svg")
 
-#btn-save span
+#btn-save::after
     background-image url("icons/save.svg")
+
+#loading
+    background-color transparent !important
+    pointer-events none
+    filter invert(100%)
+    opacity 0.6
+    &::after
+        background-image url("icons/load.svg")
